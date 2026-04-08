@@ -30,8 +30,8 @@
     <string formatted="false" name="redo">Redo</string>
     <string formatted="false" name="undo">Undo</string>
 
-    <string formatted="false" name="new_option">newâ€¦</string>
-    <string formatted="false" name="edit_option">editâ€¦</string>
+    <string formatted="false" name="new_option">new…</string>
+    <string formatted="false" name="edit_option">edit…</string>
 
     <string formatted="false" name="confirm">Confirm</string>
     <string formatted="false" name="ignore">Ignore</string>
@@ -67,7 +67,7 @@
     <string formatted="false" name="warning">Warning</string>
     <string formatted="false" name="error">Error</string>
 
-    <string formatted="false" name="loading">Loadingâ€¦</string>
+    <string formatted="false" name="loading">Loading…</string>
     <string formatted="false" name="please_wait">Please wait</string>
     <string formatted="false" name="search_hint">Search</string>
 
@@ -94,9 +94,9 @@
 
 
     <!-- Login/Logout Mechanism -->
-    <string formatted="false" name="loading_check_oauth_token">Checking login dataâ€¦</string>
-    <string formatted="false" name="loading_google_exchange_code">Exchanging Google login dataâ€¦</string>
-    <string formatted="false" name="loading_google_login">Google login on our server is completeâ€¦</string>
+    <string formatted="false" name="loading_check_oauth_token">Checking login data…</string>
+    <string formatted="false" name="loading_google_exchange_code">Exchanging Google login data…</string>
+    <string formatted="false" name="loading_google_login">Google login on our server is complete…</string>
 
     <string formatted="false" name="logout_successful">Logout successful</string>
 
@@ -312,15 +312,15 @@
         contact the Catrobat team.</string>
     <plurals name="scratch_conversion_scheduled_x">
         <item quantity="zero">No Scratch projects scheduled.</item>
-        <item quantity="one">Added %d Scratch project to the queueâ€¦</item>
-        <item quantity="other">Added %d Scratch projects to the queueâ€¦</item>
+        <item quantity="one">Added %d Scratch project to the queue…</item>
+        <item quantity="other">Added %d Scratch projects to the queue…</item>
     </plurals>
-    <string formatted="false" name="scratch_conversion_started">Started to convert Scratch projectâ€¦</string>
+    <string formatted="false" name="scratch_conversion_started">Started to convert Scratch project…</string>
     <string formatted="false" name="convert">Convert</string>
-    <string formatted="false" name="converting">Convertingâ€¦</string>
+    <string formatted="false" name="converting">Converting…</string>
     <string formatted="false" name="status_scheduled">Scheduled</string>
-    <string formatted="false" name="status_waiting_for_worker">Looking for a free workerâ€¦ Please waitâ€¦</string>
-    <string formatted="false" name="status_started">Startedâ€¦</string>
+    <string formatted="false" name="status_waiting_for_worker">Looking for a free worker… Please wait…</string>
+    <string formatted="false" name="status_started">Started…</string>
     <string formatted="false" name="status_conversion_finished">Conversion finished</string>
     <plurals name="status_in_progress_x_jobs">
         <item quantity="one">In progress: %d job</item>
@@ -331,7 +331,7 @@
         <item quantity="other">Completed: %d jobs</item>
     </plurals>
     <string formatted="false" name="status_conversion_failed">Conversion failed!</string>
-    <string formatted="false" name="status_downloading">Downloadingâ€¦</string>
+    <string formatted="false" name="status_downloading">Downloading…</string>
     <string formatted="false" name="status_download_finished">Download finished.</string>
     <string formatted="false" name="status_download_canceled">Download canceled!</string>
     <string formatted="false" name="scratch_programs_in_progress_title">In progress</string>
@@ -378,7 +378,7 @@
 
     <!-- Terms of Use and Service Error -->
     <string formatted="false" name="declined_terms_of_use_and_service_alert">To use our app, it is necessary to accept our Terms of Use and Service.
-        However, if you don\â€™t feel comfortable to do so, you can use our free web-services on</string>
+        However, if you don\’t feel comfortable to do so, you can use our free web-services on</string>
 
     <string formatted="false" name="wtf_error">An unexpected error occurred: I could not restore the sample project.</string>
 
@@ -844,7 +844,7 @@
     <string formatted="false" name="error_session_expired">Session expired, please log in.</string>
     <string formatted="false" name="error_register_empty_username">Empty username</string>
     <string formatted="false" name="error_register_username_as_email">Email address cannot be used as username</string>
-    <string formatted="false" name="error_register_invalid_username">Username should only contain letters (aâ€“z), numbers (0â€“9),
+    <string formatted="false" name="error_register_invalid_username">Username should only contain letters (a–z), numbers (0–9),
         dashes (-), underscores (_), and periods (.).</string>
     <string formatted="false" name="error_register_username_start_with">Username should not start with dashes (-), underscores (_), or
         periods (.).</string>
@@ -1017,7 +1017,7 @@
     <string formatted="false" name="brick_set_mass">"Set mass to"</string>
     <string formatted="false" name="brick_set_mass_unit">kilogram</string>
     <string formatted="false" name="brick_set_gravity_to">"Set gravity for all actors and objects to"</string>
-    <string formatted="false" name="brick_set_gravity_unit">steps/secondÂ²</string>
+    <string formatted="false" name="brick_set_gravity_unit">steps/second²</string>
     <string formatted="false" name="brick_set_velocity_to">"Set velocity to"</string>
     <string formatted="false" name="brick_set_velocity_unit">steps/second</string>
     <string formatted="false" name="brick_turn_speed_unit">degrees/second</string>
@@ -1258,7 +1258,7 @@
     <string formatted="false" name="brick_read_variable_from_file_delete">delete the file</string>
     <string formatted="false" name="brick_write_list_on_device">Write list on device</string>
     <string formatted="false" name="brick_read_list_from_device">Read list from device</string>
-    <string formatted="false" name="brick_note_default_value">add comment hereâ€¦</string>
+    <string formatted="false" name="brick_note_default_value">add comment here…</string>
     <string formatted="false" name="brick_think_bubble_default_value">Hmmmm!</string>
     <string formatted="false" name="brick_say_bubble_default_value">Hello!</string>
     <string formatted="false" name="brick_broadcast_default_value">"new message"</string>
@@ -1497,7 +1497,7 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="title_other_devices">Available devices</string>
     <string formatted="false" name="bluetooth_connection_title">Bluetooth connection</string>
     <string formatted="false" name="skip_bluetooth_connection">Skip</string>
-    <string formatted="false" name="connecting_please_wait">Connecting to your device.\nPlease waitâ€¦</string>
+    <string formatted="false" name="connecting_please_wait">Connecting to your device.\nPlease wait…</string>
     <string formatted="false" name="bt_connection_failed">Connection to device failed!</string>
     <string formatted="false" name="none_found">No unpaired devices found</string>
     <string formatted="false" name="multiplayer_bluetooth_connection_information_title">Bluetooth connection
@@ -1541,7 +1541,7 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="nxt_play_tone">Play NXT tone</string>
     <string formatted="false" name="nxt_tone_duration">Duration</string>
     <string formatted="false" name="nxt_tone_frequency">Frequency</string>
-    <string formatted="false" name="nxt_tone_hundred_hz">Ã—100Hz</string>
+    <string formatted="false" name="nxt_tone_hundred_hz">×100Hz</string>
 
     <string formatted="false" name="nxt_motor_a">A</string>
     <string formatted="false" name="nxt_motor_b">B</string>
@@ -1598,8 +1598,8 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="ev3_sensor_color_ambient">EV3 color sensor ambient</string>
     <string formatted="false" name="ev3_sensor_color_reflected">Ev3 color sensor reflected</string>
     <string formatted="false" name="ev3_sensor_hitechnic_color">HiTechnic color sensor</string>
-    <string formatted="false" name="ev3_sensor_nxt_temperature_c">NXT temperature sensor (Â°C)</string>
-    <string formatted="false" name="ev3_sensor_nxt_temperature_f">NXT temperature sensor (Â°F)</string>
+    <string formatted="false" name="ev3_sensor_nxt_temperature_c">NXT temperature sensor (°C)</string>
+    <string formatted="false" name="ev3_sensor_nxt_temperature_f">NXT temperature sensor (°F)</string>
     <string formatted="false" name="ev3_sensor_nxt_light">NXT light sensor</string>
     <string formatted="false" name="ev3_sensor_nxt_light_active">NXT light sensor active</string>
     <string formatted="false" name="ev3_sensor_nxt_sound">NXT sound sensor</string>
@@ -1959,8 +1959,8 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_color_ambient">EV3 ambient color</string>
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_color_reflected">EV3 reflected color</string>
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_hitechnic_color">EV3 hitechnic color</string>
-    <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_temperature_c">EV3 NXT temperature in Â°C</string>
-    <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_temperature_f">EV3 NXT temperature in Â°F</string>
+    <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_temperature_c">EV3 NXT temperature in °C</string>
+    <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_temperature_f">EV3 NXT temperature in °F</string>
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_light">EV3 NXT light</string>
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_light_active">EV3 NXT light active</string>
     <string formatted="false" name="formula_editor_sensor_lego_ev3_sensor_nxt_sound">EV3 NXT sound</string>
@@ -2036,10 +2036,10 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="formula_editor_logic_greaterequal">&#x2265;</string>
     <string formatted="false" name="formula_editor_logic_leserequal">&#x2264;</string>
     <string formatted="false" name="formula_editor_logic_equal">=</string>
-    <string formatted="false" name="formula_editor_operator_mult">Ã—</string>
+    <string formatted="false" name="formula_editor_operator_mult">×</string>
     <string formatted="false" name="formula_editor_operator_plus">+</string>
     <string formatted="false" name="formula_editor_operator_minus">-</string>
-    <string formatted="false" name="formula_editor_operator_divide">Ã·</string>
+    <string formatted="false" name="formula_editor_operator_divide">÷</string>
     <string formatted="false" name="formula_editor_operator_power">^</string>
     <string formatted="false" name="formula_editor_image_button_description_delete">delete</string>
     <string formatted="false" name="formula_editor_image_button_description_calculate">calculate</string>
@@ -2147,8 +2147,8 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="formula_editor_function_object_with_id_visible">object with ID visible</string>
     <string formatted="false" name="formula_editor_intro_title_formula_editor">Formula editor</string>
     <string formatted="false" name="formula_editor_intro_summary_formula_editor">With the formula editor you can create mathematical and
-        logical formulas that you can use in your bricks.\n\nContinue by tapping â€œNEXTâ€ or exit
-        with â€œSKIPâ€.
+        logical formulas that you can use in your bricks.\n\nContinue by tapping “NEXT” or exit
+        with “SKIP”.
     </string>
     <string formatted="false" name="formula_editor_intro_title_input_field">Input field</string>
     <string formatted="false" name="formula_editor_intro_summary_input_field">Here you can see and edit your formula.</string>
@@ -2243,7 +2243,7 @@ needs read and write access to it. You can always change permissions through you
         errors. You can\'t undo this!</string>
 
     <!-- Upload progress dialog -->
-    <string formatted="false" name="progress_upload_dialog_message">Your project gets uploaded to the app\â€™s sharing site where others
+    <string formatted="false" name="progress_upload_dialog_message">Your project gets uploaded to the app\’s sharing site where others
         can use and download it. You can also download your project as a standalone app.</string>
     <string formatted="false" name="progress_upload_dialog_failed">Upload failed. The upload feature is currently unavailable. Please try again later.</string>
     <string formatted="false" name="progress_upload_dialog_show_program">Show project</string>
@@ -2293,7 +2293,7 @@ needs read and write access to it. You can always change permissions through you
 
     <!-- Symbols -->
     <string formatted="false" name="percent_symbol">%</string>
-    <string formatted="false" name="hertz_symbol">ãŽ</string>
+    <string formatted="false" name="hertz_symbol">㎐</string>
 
     <string formatted="false" name="sans_serif_font" translatable="false">sans_serif</string>
     <string formatted="false" name="serif_font" translatable="false">serif</string>
