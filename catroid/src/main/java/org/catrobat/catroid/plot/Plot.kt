@@ -1,6 +1,6 @@
 /*
  * Catroid: An on-device visual programming system for Android devices
- * Copyright (C) 2010-2025  The Catrobat Team
+ * Copyright (C) 2010-2026 The Catrobat Team
  * (<http://developer.catrobat.org/credits>)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -82,6 +82,8 @@ class Plot {
         return isEngraving
     }
 
+    private fun copyPoint(point: PointF): PointF = PointF(point.x, point.y)
+
     private fun startLine(data: ArrayList<ArrayList<PointF>>, queue: Queue<Queue<PointF>>) {
         data.add(ArrayList())
         queue.addLast(Queue())
@@ -92,9 +94,9 @@ class Plot {
         data: ArrayList<ArrayList<PointF>>,
         queue: Queue<Queue<PointF>>
     ) {
-        data.add(arrayListOf(point))
+        data.add(arrayListOf(copyPoint(point)))
         queue.addLast(Queue())
-        queue.last().addLast(point)
+        queue.last().addLast(copyPoint(point))
     }
 
     private fun addPoint(
@@ -102,8 +104,8 @@ class Plot {
         data: ArrayList<ArrayList<PointF>>,
         queue: Queue<Queue<PointF>>
     ) {
-        data.last().add(point)
-        queue.last().addLast(point)
+        data.last().add(copyPoint(point))
+        queue.last().addLast(copyPoint(point))
     }
 
     fun startNewPlotLine() {
