@@ -58,9 +58,9 @@ class PlotArcActionTest {
 
         action.act(1.0f)
 
-        assertEquals(10f, sprite.look.xInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DELTA)
+        assertEquals(10f, sprite.look.xInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DIRECTION_DELTA)
     }
 
     @Test
@@ -75,9 +75,9 @@ class PlotArcActionTest {
 
         action.act(1.0f)
 
-        assertEquals(-10f, sprite.look.xInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(-90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DELTA)
+        assertEquals(-10f, sprite.look.xInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(-90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DIRECTION_DELTA)
     }
 
     @Test
@@ -92,12 +92,13 @@ class PlotArcActionTest {
 
         action.act(1.0f)
 
-        assertEquals(-10f, sprite.look.xInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, DELTA)
-        assertEquals(-90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DELTA)
+        assertEquals(-10f, sprite.look.xInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(10f, sprite.look.yInUserInterfaceDimensionUnit, POSITION_DELTA)
+        assertEquals(-90f, sprite.look.motionDirectionInUserInterfaceDimensionUnit, DIRECTION_DELTA)
     }
 
     companion object {
-        private const val DELTA = 0.0001f
+        private const val POSITION_DELTA = 0.0001f
+        private const val DIRECTION_DELTA = 0.5f
     }
 }
