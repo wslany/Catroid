@@ -25,15 +25,16 @@ package org.catrobat.catroid.content.actions
 import android.util.Log
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
 import org.catrobat.catroid.content.Scope
-import org.catrobat.catroid.content.bricks.PlotArcBrick
+import org.catrobat.catroid.content.bricks.ArcBrick
 import org.catrobat.catroid.formulaeditor.Formula
 import org.catrobat.catroid.formulaeditor.InterpretationException
 import kotlin.math.cos
+import kotlin.math.sign
 import kotlin.math.sin
 
 class PlotArcAction : TemporalAction() {
     private var scope: Scope? = null
-    private var direction: PlotArcBrick.Directions = PlotArcBrick.Directions.LEFT
+    private var direction: ArcBrick.Directions = ArcBrick.Directions.LEFT
     lateinit var radius: Formula
     lateinit var degrees: Formula
 
@@ -41,7 +42,9 @@ class PlotArcAction : TemporalAction() {
     private var radiusValue: Double = 0.0
     private var centerX: Double = 0.0
     private var centerY: Double = 0.0
-    private var angle: Double = Math.toRadians(90.0)
+    private var startX: Double = 0.0
+    private var startY: Double = 0.0
+    private var startMotionDirectionInRadians: Double = Math.toRadians(90.0)
 
     override fun begin() {
         super.begin()
@@ -50,14 +53,19 @@ class PlotArcAction : TemporalAction() {
         }
         try {
             degreesValue =
-                degrees.interpretDouble(scope) * if (direction == PlotArcBrick.Directions.LEFT) -1 else 1
-            radiusValue = radius.interpretDouble(scope)
+                degrees.interpretDouble(scope) * if (direction == ArcBrick.Directions.RIGHT) 1 else -1
+            radiusValue = kotlin.math.abs(radius.interpretDouble(scope))
             val sprite = scope!!.sprite
-            val x = sprite.look.xInUserInterfaceDimensionUnit
-            val y = sprite.look.yInUserInterfaceDimensionUnit
-            angle = Math.toRadians(sprite.look.rotation.toDouble())
-            centerX = x + radiusValue * cos(angle)
-            centerY = y + radiusValue * sin(angle)
+            startX = sprite.look.xInUserInterfaceDimensionUnit.toDouble()
+            startY = sprite.look.yInUserInterfaceDimensionUnit.toDouble()
+            startMotionDirectionInRadians =
+                Math.toRadians(sprite.look.motionDirectionInUserInterfaceDimensionUnit.toDouble())
+
+            val turnSign = if (degreesValue == 0.0) 1.0 else sign(degreesValue)
+            val normalX = turnSign * cos(startMotionDirectionInRadians)
+            val normalY = -turnSign * sin(startMotionDirectionInRadians)
+            centerX = startX + radiusValue * normalX
+            centerY = startY + radiusValue * normalY
         } catch (interpretationException: InterpretationException) {
             Log.d(
                 javaClass.simpleName,
@@ -72,16 +80,19 @@ class PlotArcAction : TemporalAction() {
             return
         }
         try {
-            for (i in 0 until 101) {
-                val radians = Math.toRadians(degreesValue * i / 100)
-                val x1 = centerX - radiusValue * cos(radians + angle)
-                val y1 = centerY - radiusValue * sin(radians + angle)
-                scope!!.sprite.look.setPositionInUserInterfaceDimensionUnit(
-                    x1.toFloat(),
-                    y1.toFloat()
-                )
-            }
-            scope!!.sprite.look.rotation = Math.toDegrees(angle - degreesValue).toFloat()
+            val traversedDegrees = degreesValue * percent
+            val traversedRadians = Math.toRadians(-traversedDegrees)
+            val startOffsetX = startX - centerX
+            val startOffsetY = startY - centerY
+            val rotatedOffsetX =
+                startOffsetX * cos(traversedRadians) - startOffsetY * sin(traversedRadians)
+            val rotatedOffsetY =
+                startOffsetX * sin(traversedRadians) + startOffsetY * cos(traversedRadians)
+            val newX = centerX + rotatedOffsetX
+            val newY = centerY + rotatedOffsetY
+            scope!!.sprite.look.setPositionInUserInterfaceDimensionUnit(newX.toFloat(), newY.toFloat())
+            scope!!.sprite.look.motionDirectionInUserInterfaceDimensionUnit =
+                Math.toDegrees(startMotionDirectionInRadians).toFloat() + traversedDegrees.toFloat()
         } catch (interpretationException: InterpretationException) {
             Log.d(
                 javaClass.simpleName,
@@ -95,7 +106,7 @@ class PlotArcAction : TemporalAction() {
         this.scope = scope
     }
 
-    fun setDirection(direction: PlotArcBrick.Directions) {
+    fun setDirection(direction: ArcBrick.Directions) {
         this.direction = direction
     }
 }

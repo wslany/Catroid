@@ -35,6 +35,7 @@ import org.catrobat.catroid.content.WhenGamepadButtonScript
 import org.catrobat.catroid.content.bricks.AddItemToUserListBrick
 import org.catrobat.catroid.content.bricks.ArduinoSendDigitalValueBrick
 import org.catrobat.catroid.content.bricks.ArduinoSendPWMValueBrick
+import org.catrobat.catroid.content.bricks.ArcBrick
 import org.catrobat.catroid.content.bricks.AskBrick
 import org.catrobat.catroid.content.bricks.AskSpeechBrick
 import org.catrobat.catroid.content.bricks.AssertEqualsBrick
@@ -78,8 +79,6 @@ import org.catrobat.catroid.content.bricks.DroneTakeOffLandBrick
 import org.catrobat.catroid.content.bricks.DroneTurnLeftBrick
 import org.catrobat.catroid.content.bricks.DroneTurnRightBrick
 import org.catrobat.catroid.content.bricks.EditLookBrick
-import org.catrobat.catroid.content.bricks.EmbroideryArcBrick
-import org.catrobat.catroid.content.bricks.EmbroideryThroughBrick
 import org.catrobat.catroid.content.bricks.ExitStageBrick
 import org.catrobat.catroid.content.bricks.FadeParticleEffectBrick
 import org.catrobat.catroid.content.bricks.FinishStageBrick
@@ -90,6 +89,7 @@ import org.catrobat.catroid.content.bricks.ForeverBrick
 import org.catrobat.catroid.content.bricks.GlideToBrick
 import org.catrobat.catroid.content.bricks.GoNStepsBackBrick
 import org.catrobat.catroid.content.bricks.GoToBrick
+import org.catrobat.catroid.content.bricks.GoThroughBrick
 import org.catrobat.catroid.content.bricks.HideBrick
 import org.catrobat.catroid.content.bricks.HideTextBrick
 import org.catrobat.catroid.content.bricks.IfLogicBeginBrick
@@ -107,8 +107,6 @@ import org.catrobat.catroid.content.bricks.JumpingSumoRotateRightBrick
 import org.catrobat.catroid.content.bricks.JumpingSumoSoundBrick
 import org.catrobat.catroid.content.bricks.JumpingSumoTakingPictureBrick
 import org.catrobat.catroid.content.bricks.JumpingSumoTurnBrick
-import org.catrobat.catroid.content.bricks.LaserArcBrick
-import org.catrobat.catroid.content.bricks.LaserThroughBrick
 import org.catrobat.catroid.content.bricks.LegoEv3MotorMoveBrick
 import org.catrobat.catroid.content.bricks.LegoEv3MotorStopBrick
 import org.catrobat.catroid.content.bricks.LegoEv3MotorTurnAngleBrick
@@ -142,8 +140,6 @@ import org.catrobat.catroid.content.bricks.PlayNoteForBeatsBrick
 import org.catrobat.catroid.content.bricks.PlaySoundAndWaitBrick
 import org.catrobat.catroid.content.bricks.PlaySoundAtBrick
 import org.catrobat.catroid.content.bricks.PlaySoundBrick
-import org.catrobat.catroid.content.bricks.PlotArcBrick
-import org.catrobat.catroid.content.bricks.PlotThroughBrick
 import org.catrobat.catroid.content.bricks.PointInDirectionBrick
 import org.catrobat.catroid.content.bricks.PointToBrick
 import org.catrobat.catroid.content.bricks.PreviousLookBrick
@@ -474,6 +470,8 @@ open class CategoryBricksFactory {
         motionBrickList.add(TurnRightBrick(BrickValues.TURN_DEGREES))
         motionBrickList.add(PointInDirectionBrick(BrickValues.POINT_IN_DIRECTION))
         motionBrickList.add(PointToBrick(null))
+        motionBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        motionBrickList.add(GoThroughBrick(0, 0, 0, 0))
         motionBrickList.add(SetRotationStyleBrick())
         motionBrickList.add(
             GlideToBrick(
@@ -1053,8 +1051,8 @@ open class CategoryBricksFactory {
         embroideryBrickList.add(SewUpBrick())
         embroideryBrickList.add(StopRunningStitchBrick())
         embroideryBrickList.add(WriteEmbroideryToFileBrick(context.getString(R.string.brick_default_embroidery_file)))
-        embroideryBrickList.add(EmbroideryArcBrick(PlotArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        embroideryBrickList.add(EmbroideryThroughBrick(0, 0, 0, 0))
+        embroideryBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        embroideryBrickList.add(GoThroughBrick(0, 0, 0, 0))
         return embroideryBrickList
     }
 
@@ -1064,8 +1062,8 @@ open class CategoryBricksFactory {
         plotBrickList.add(StopPlotBrick())
         plotBrickList.add(SavePlotBrick(context.getString(R.string.brick_default_plot_file)))
         plotBrickList.add(SharePlotBrick(context.getString(R.string.brick_default_plot_file)))
-        plotBrickList.add(PlotArcBrick(PlotArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        plotBrickList.add(PlotThroughBrick(0, 0, 0, 0))
+        plotBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        plotBrickList.add(GoThroughBrick(0, 0, 0, 0))
         return plotBrickList
     }
 
@@ -1077,8 +1075,8 @@ open class CategoryBricksFactory {
         laserBrickList.add(StopCutBrick())
         laserBrickList.add(SaveLaserBrick(context.getString(R.string.brick_default_laser_file)))
         laserBrickList.add(ShareLaserBrick(context.getString(R.string.brick_default_laser_file)))
-        laserBrickList.add(LaserArcBrick(PlotArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        laserBrickList.add(LaserThroughBrick(0, 0, 0, 0))
+        laserBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        laserBrickList.add(GoThroughBrick(0, 0, 0, 0))
         return laserBrickList
     }
 

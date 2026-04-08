@@ -24,68 +24,80 @@ package org.catrobat.catroid.content.bricks
 
 import android.content.Context
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import org.catrobat.catroid.R
+import org.catrobat.catroid.content.AdapterViewOnItemSelectedListenerImpl
 import org.catrobat.catroid.content.Sprite
 import org.catrobat.catroid.content.actions.ScriptSequenceAction
 import org.catrobat.catroid.content.bricks.Brick.BrickField
 import org.catrobat.catroid.formulaeditor.Formula
 
-class LaserThroughBrick() : FormulaBrick() {
+class ArcBrick() : FormulaBrick() {
+    private var direction: Directions
+
+    enum class Directions {
+        LEFT, RIGHT
+    }
 
     init {
+        direction = Directions.LEFT
         addAllowedBrickField(
-            BrickField.X_POSITION,
-            R.id.brick_laser_through_x1_edit_text
+            BrickField.SIZE,
+            R.id.brick_arc_edit_text1
         )
         addAllowedBrickField(
-            BrickField.Y_POSITION,
-            R.id.brick_laser_through_y1_edit_text
-        )
-        addAllowedBrickField(
-            BrickField.X_DESTINATION,
-            R.id.brick_laser_through_x2_edit_text
-        )
-        addAllowedBrickField(
-            BrickField.Y_DESTINATION,
-            R.id.brick_laser_through_y2_edit_text
+            BrickField.DEGREES,
+            R.id.brick_arc_edit_text2
         )
     }
 
-    constructor(x1: Int, y1: Int, x2: Int, y2: Int) : this(
-        Formula(x1),
-        Formula(y1),
-        Formula(x2),
-        Formula(y2)
+    constructor(directionEnum: Directions, radius: Float, degrees: Float) : this(
+        directionEnum,
+        Formula(radius),
+        Formula(degrees)
     )
 
-    constructor(
-        formula1: Formula,
-        formula2: Formula,
-        formula3: Formula,
-        formula4: Formula
-    ) : this() {
-        setFormulaWithBrickField(BrickField.X_POSITION, formula1)
-        setFormulaWithBrickField(BrickField.Y_POSITION, formula2)
-        setFormulaWithBrickField(BrickField.X_DESTINATION, formula3)
-        setFormulaWithBrickField(BrickField.Y_DESTINATION, formula4)
+    constructor(directionEnum: Directions, formula1: Formula?, formula2: Formula?) : this() {
+        direction = directionEnum
+        setFormulaWithBrickField(BrickField.SIZE, formula1)
+        setFormulaWithBrickField(BrickField.DEGREES, formula2)
     }
 
     override fun getViewResource(): Int {
-        return R.layout.brick_laser_through
+        return R.layout.brick_arc
     }
 
     override fun getView(context: Context): View {
         super.getView(context)
+
+        val spinnerAdapter = ArrayAdapter.createFromResource(
+            context,
+            R.array.brick_plot_arc_direction_spinner,
+            android.R.layout.simple_spinner_item
+        )
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        val spinner = view.findViewById<Spinner>(R.id.brick_arc_spinner)
+        spinner.adapter = spinnerAdapter
+        spinner.onItemSelectedListener = AdapterViewOnItemSelectedListenerImpl { position: Int? ->
+            if (position != null) {
+                direction = Directions.values()[position]
+            }
+            Unit
+        }
+        spinner.setSelection(direction.ordinal)
         return view
     }
 
     override fun addActionToSequence(sprite: Sprite, sequence: ScriptSequenceAction) {
         sequence.addAction(
-            sprite.actionFactory?.createPlotThroughAction(
-                sprite, sequence, getFormulaWithBrickField(BrickField.X_POSITION),
-                getFormulaWithBrickField(BrickField.Y_POSITION),
-                getFormulaWithBrickField(BrickField.X_DESTINATION),
-                getFormulaWithBrickField(BrickField.Y_DESTINATION)
+            sprite.actionFactory?.createPlotArcAction(
+                sprite,
+                sequence,
+                direction,
+                getFormulaWithBrickField(BrickField.SIZE),
+                getFormulaWithBrickField(BrickField.DEGREES)
             )
         )
     }

@@ -37,48 +37,53 @@
         android:visibility="gone" />
 
     <org.catrobat.catroid.ui.BrickLayout
-        android:id="@+id/brick_plot_arc_layout"
-        style="@style/BrickContainer.Plot.Big">
+        android:id="@+id/brick_go_through_layout"
+        style="@style/BrickContainer.Motion.Big">
 
-        <include layout="@layout/icon_brick_category_plot" />
+        <include layout="@layout/icon_brick_category_motion" />
 
         <TextView
-            android:id="@+id/brick_plot_arc_text_view"
+            android:id="@+id/brick_go_through_text_view"
             style="@style/BrickText.SingleLine"
-            android:text="@string/plot_arc_direction">
-        </TextView>
-
-        <Spinner
-            android:id="@+id/brick_plot_arc_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textDirection="locale">
-        </Spinner>
+            android:text="@string/go_through"
+            app:layout_newLine="true" />
 
         <TextView
             style="@style/BrickText.SingleLine"
-            android:text="@string/plot_with_radius">
-        </TextView>
+            android:text="@string/x_label" />
 
         <TextView
-            android:id="@+id/brick_plot_arc_edit_text1"
-            style="@style/BrickEditText">
-        </TextView>
+            android:id="@+id/brick_go_through_x1_edit_text"
+            style="@style/BrickEditText" />
 
         <TextView
             style="@style/BrickText.SingleLine"
-            android:text="@string/plot_for_degrees">
-        </TextView>
+            android:text="@string/y_label"
+            app:layout_newLine="true" />
 
         <TextView
-            android:id="@+id/brick_plot_arc_edit_text2"
-            style="@style/BrickEditText">
-        </TextView>
+            android:id="@+id/brick_go_through_y1_edit_text"
+            style="@style/BrickEditText" />
 
         <TextView
-            style="@style/BrickText"
-            android:text="@string/degree_symbol">
-        </TextView>
+            style="@style/BrickText.SingleLine"
+            android:text="@string/go_through_target" />
+
+        <TextView
+            style="@style/BrickText.SingleLine"
+            android:text="@string/x_label" />
+
+        <TextView
+            android:id="@+id/brick_go_through_x2_edit_text"
+            style="@style/BrickEditText" />
+
+        <TextView
+            style="@style/BrickText.SingleLine"
+            android:text="@string/y_label" />
+
+        <TextView
+            android:id="@+id/brick_go_through_y2_edit_text"
+            style="@style/BrickEditText" />
 
     </org.catrobat.catroid.ui.BrickLayout>
 

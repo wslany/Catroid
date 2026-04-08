@@ -202,8 +202,7 @@ import org.catrobat.catroid.content.bricks.PhiroMotorMoveForwardBrick;
 import org.catrobat.catroid.content.bricks.PhiroMotorStopBrick;
 import org.catrobat.catroid.content.bricks.PhiroPlayToneBrick;
 import org.catrobat.catroid.content.bricks.PhiroRGBLightBrick;
-import org.catrobat.catroid.content.bricks.PlotArcBrick;
-import org.catrobat.catroid.content.bricks.PlotThroughBrick;
+import org.catrobat.catroid.content.bricks.ArcBrick;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableDrum;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableMusicalInstrument;
 import org.catrobat.catroid.formulaeditor.Formula;
@@ -624,7 +623,7 @@ public class ActionFactory extends Actions {
 	}
 
 	public Action createPlotArcAction(Sprite sprite, SequenceAction sequence,
-			PlotArcBrick.Directions direction,
+			ArcBrick.Directions direction,
 			Formula radius, Formula degrees) {
 		PlotArcAction action = Actions.action(PlotArcAction.class);
 		action.setScope(new Scope(ProjectManager.getInstance().getCurrentProject(), sprite,

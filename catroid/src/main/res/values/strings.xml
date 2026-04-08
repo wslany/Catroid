@@ -1724,6 +1724,9 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="direction_right">right</string>
     <string formatted="false" name="plot_arc_direction">Plot arc going</string>
     <string formatted="false" name="laser_arc_direction">Create arc going</string>
+    <string formatted="false" name="arc_direction">Create arc going</string>
+    <string formatted="false" name="go_through">Create arc going through</string>
+    <string formatted="false" name="go_through_target">going to</string>
     <string formatted="false" name="plot_with_radius">with radius</string>
     <string formatted="false" name="plot_for_degrees">for</string>
     <string formatted="false" name="plot_through">Plot arc going through</string>
