@@ -1051,8 +1051,7 @@ open class CategoryBricksFactory {
         embroideryBrickList.add(SewUpBrick())
         embroideryBrickList.add(StopRunningStitchBrick())
         embroideryBrickList.add(WriteEmbroideryToFileBrick(context.getString(R.string.brick_default_embroidery_file)))
-        embroideryBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        embroideryBrickList.add(GoThroughBrick(0, 0, 0, 0))
+        embroideryBrickList.addAll(setupPeripheralMotionBrickList())
         return embroideryBrickList
     }
 
@@ -1062,8 +1061,7 @@ open class CategoryBricksFactory {
         plotBrickList.add(StopPlotBrick())
         plotBrickList.add(SavePlotBrick(context.getString(R.string.brick_default_plot_file)))
         plotBrickList.add(SharePlotBrick(context.getString(R.string.brick_default_plot_file)))
-        plotBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        plotBrickList.add(GoThroughBrick(0, 0, 0, 0))
+        plotBrickList.addAll(setupPeripheralMotionBrickList())
         return plotBrickList
     }
 
@@ -1075,9 +1073,24 @@ open class CategoryBricksFactory {
         laserBrickList.add(StopCutBrick())
         laserBrickList.add(SaveLaserBrick(context.getString(R.string.brick_default_laser_file)))
         laserBrickList.add(ShareLaserBrick(context.getString(R.string.brick_default_laser_file)))
-        laserBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
-        laserBrickList.add(GoThroughBrick(0, 0, 0, 0))
+        laserBrickList.addAll(setupPeripheralMotionBrickList())
         return laserBrickList
+    }
+
+    private fun setupPeripheralMotionBrickList(): List<Brick> {
+        val peripheralMotionBrickList: MutableList<Brick> = ArrayList()
+        peripheralMotionBrickList.add(PlaceAtBrick(BrickValues.X_POSITION, BrickValues.Y_POSITION))
+        peripheralMotionBrickList.add(SetXBrick(Formula(BrickValues.X_POSITION)))
+        peripheralMotionBrickList.add(SetYBrick(BrickValues.Y_POSITION))
+        peripheralMotionBrickList.add(ChangeXByNBrick(BrickValues.CHANGE_X_BY))
+        peripheralMotionBrickList.add(ChangeYByNBrick(BrickValues.CHANGE_Y_BY))
+        peripheralMotionBrickList.add(MoveNStepsBrick(BrickValues.MOVE_STEPS))
+        peripheralMotionBrickList.add(TurnLeftBrick(BrickValues.TURN_DEGREES))
+        peripheralMotionBrickList.add(TurnRightBrick(BrickValues.TURN_DEGREES))
+        peripheralMotionBrickList.add(PointInDirectionBrick(BrickValues.POINT_IN_DIRECTION))
+        peripheralMotionBrickList.add(ArcBrick(ArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        peripheralMotionBrickList.add(GoThroughBrick(0, 0, 0, 0))
+        return peripheralMotionBrickList
     }
 
     private fun setupAssertionsCategoryList(context: Context): List<Brick> {
