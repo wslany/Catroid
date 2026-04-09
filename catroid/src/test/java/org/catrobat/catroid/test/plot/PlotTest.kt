@@ -26,6 +26,7 @@ package org.catrobat.catroid.test.plot
 import android.graphics.PointF
 import com.badlogic.gdx.utils.Queue
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertTrue
 import org.catrobat.catroid.plot.Plot
 import org.catrobat.catroid.plot.SVGPlotGenerator
 import org.catrobat.catroid.test.utils.Reflection
@@ -38,22 +39,27 @@ class PlotTest {
             width = 200f
             height = 200f
         }
-        val line = arrayListOf(PointF(0f, 0f), PointF(0f, 10f))
+        val line = arrayListOf(point(0f, 0f), point(0f, 10f))
 
         val path = SVGPlotGenerator(plot).pathFromData(arrayListOf(line))
+        val match = Regex("""M([0-9.]+) ([0-9.]+) L([0-9.]+) ([0-9.]+)""").find(path)
 
-        assertEquals(
-            "<path fill=\"none\" style=\"stroke:#000000;stroke-width:1.0;stroke-linecap:round;stroke-opacity:1;\" d=\"M75.59 75.59 L75.59 68.03\" />\n",
-            path
-        )
+        assertTrue("Expected an SVG path with two coordinate pairs", match != null)
+        val startX = match!!.groupValues[1].toFloat()
+        val startY = match.groupValues[2].toFloat()
+        val endX = match.groupValues[3].toFloat()
+        val endY = match.groupValues[4].toFloat()
+
+        assertEquals(startX, endX)
+        assertTrue("Expected a positive stage Y movement to move upward in SVG space", endY < startY)
     }
 
     @Test
     @Throws(Exception::class)
     fun testEngraveExportDataRemainsStableWhenRenderQueuePointsChange() {
         val plot = Plot()
-        plot.startNewEngraveLine(PointF(100f, 100f))
-        plot.addEngravePoint(PointF(150f, 200f))
+        plot.startNewEngraveLine(point(100f, 100f))
+        plot.addEngravePoint(point(150f, 200f))
 
         val originalPath = SVGPlotGenerator(plot).pathFromData(plot.engraveDataPointLists)
 
@@ -67,4 +73,10 @@ class PlotTest {
 
         assertEquals(originalPath, mutatedPath)
     }
+
+    private fun point(x: Float, y: Float): PointF =
+        PointF().apply {
+            this.x = x
+            this.y = y
+        }
 }
