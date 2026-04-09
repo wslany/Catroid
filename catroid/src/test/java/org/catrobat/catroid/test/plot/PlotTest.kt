@@ -24,15 +24,26 @@
 package org.catrobat.catroid.test.plot
 
 import android.graphics.PointF
+import com.badlogic.gdx.graphics.Camera
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.Queue
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import org.catrobat.catroid.plot.Plot
 import org.catrobat.catroid.plot.SVGPlotGenerator
+import org.catrobat.catroid.stage.StageActivity
+import org.catrobat.catroid.stage.StageListener
 import org.catrobat.catroid.test.utils.Reflection
+import org.junit.After
 import org.junit.Test
+import org.mockito.Mockito
 
 class PlotTest {
+    @After
+    fun tearDown() {
+        StageActivity.stageListener = null
+    }
+
     @Test
     fun testSvgExportInvertsStageYAxis() {
         val plot = Plot().apply {
@@ -73,6 +84,80 @@ class PlotTest {
 
         assertEquals(originalPath, mutatedPath)
     }
+
+    @Test
+    fun testPlotRendersSingleSegmentAsSoonAsItHasTwoPoints() {
+        setUpShapeRenderer()
+        val plot = Plot().apply {
+            startNewPlotLine(point(0f, 0f))
+            addPlotPoint(point(100f, 0f))
+        }
+
+        plot.drawLinesForSprite(screenRatio = 1f, camera = camera())
+
+        val plotQueue = queue(plot, "plotQueue")
+        assertEquals(1, plotQueue.size)
+        assertEquals(1, plotQueue.first().size)
+    }
+
+    @Test
+    fun testCutRenderingAdvancesToFollowingLine() {
+        setUpShapeRenderer()
+        val plot = Plot().apply {
+            startNewCutLine(point(0f, 0f))
+            addCutPoint(point(100f, 0f))
+            startNewCutLine(point(0f, 50f))
+            addCutPoint(point(100f, 50f))
+        }
+
+        plot.drawLinesForSprite(screenRatio = 1f, camera = camera())
+
+        val cutQueue = queue(plot, "cutQueue")
+        assertEquals(1, cutQueue.size)
+        assertEquals(1, cutQueue.first().size)
+    }
+
+    @Test
+    fun testEngraveRendersSingleSegmentAsSoonAsItHasTwoPoints() {
+        setUpShapeRenderer()
+        val plot = Plot().apply {
+            startNewEngraveLine(point(0f, 0f))
+            addEngravePoint(point(0f, 100f))
+        }
+
+        plot.drawLinesForSprite(screenRatio = 1f, camera = camera())
+
+        val engraveQueue = queue(plot, "engraveQueue")
+        assertEquals(1, engraveQueue.size)
+        assertEquals(1, engraveQueue.first().size)
+    }
+
+    private fun setUpShapeRenderer(): ShapeRenderer {
+        val renderer = Mockito.mock(ShapeRenderer::class.java)
+        StageActivity.stageListener = StageListener().apply {
+            shapeRenderer = renderer
+        }
+        return renderer
+    }
+
+    private fun camera(): Camera =
+        object : Camera() {
+            init {
+                viewportWidth = 200f
+                viewportHeight = 200f
+                position.set(0f, 0f, 0f)
+            }
+
+            override fun update() = Unit
+
+            override fun update(updateFrustum: Boolean) = Unit
+        }.apply {
+            position.set(0f, 0f, 0f)
+        }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun queue(plot: Plot, fieldName: String): Queue<Queue<PointF>> =
+        Reflection.getPrivateField(plot, fieldName) as Queue<Queue<PointF>>
 
     private fun point(x: Float, y: Float): PointF =
         PointF().apply {
