@@ -33,6 +33,22 @@ import org.junit.Test
 
 class PlotTest {
     @Test
+    fun testSvgExportInvertsStageYAxis() {
+        val plot = Plot().apply {
+            width = 200f
+            height = 200f
+        }
+        val line = arrayListOf(PointF(0f, 0f), PointF(0f, 10f))
+
+        val path = SVGPlotGenerator(plot).pathFromData(arrayListOf(line))
+
+        assertEquals(
+            "<path fill=\"none\" style=\"stroke:#000000;stroke-width:1.0;stroke-linecap:round;stroke-opacity:1;\" d=\"M75.59 75.59 L75.59 68.03\" />\n",
+            path
+        )
+    }
+
+    @Test
     @Throws(Exception::class)
     fun testEngraveExportDataRemainsStableWhenRenderQueuePointsChange() {
         val plot = Plot()
