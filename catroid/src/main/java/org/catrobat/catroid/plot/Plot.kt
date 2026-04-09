@@ -140,22 +140,11 @@ class Plot {
         return plotDataPointLists
     }
 
-    private fun canDraw(): Boolean {
-        return plotQueue.size > 2 || (!plotQueue.isEmpty && plotQueue.last().size > 2)
-    }
-
-    private fun canCut(): Boolean {
-        return cutQueue.size > 2 || (!cutQueue.isEmpty && cutQueue.last().size > 2)
-    }
-
-    private fun canEngrave(): Boolean {
-        return engraveQueue.size > 2 || (!engraveQueue.isEmpty && engraveQueue.last().size > 2)
-    }
-
-    private fun updateQueue(queue: Queue<Queue<PointF>>) {
-        if (queue.isEmpty || queue.size == 1) return
-        if (queue.first().size == 1)
+    private fun canRender(queue: Queue<Queue<PointF>>): Boolean {
+        while (queue.size > 1 && queue.first().size <= 1) {
             queue.removeFirst()
+        }
+        return !queue.isEmpty && queue.first().size > 1
     }
 
     fun drawLinesForSprite(screenRatio: Float, camera: Camera?) {
@@ -166,26 +155,23 @@ class Plot {
         renderer.color = Color.BLACK
         renderer.begin(ShapeRenderer.ShapeType.Filled)
 
-        while (canDraw()) {
+        while (canRender(plotQueue)) {
             drawLine(plotQueue, screenRatio, renderer, camera)
-            updateQueue(plotQueue)
         }
         renderer.end()
 
         renderer.color = Color.RED
         renderer.begin(ShapeRenderer.ShapeType.Filled)
-        while (canCut()) {
+        while (canRender(cutQueue)) {
             drawLine(cutQueue, screenRatio, renderer, camera)
-            updateQueue(plotQueue)
         }
         renderer.end()
 
 
         renderer.color = Color.BLUE
         renderer.begin(ShapeRenderer.ShapeType.Filled)
-        while (canEngrave()) {
+        while (canRender(engraveQueue)) {
             drawLine(engraveQueue, screenRatio, renderer, camera)
-            updateQueue(engraveQueue)
         }
         renderer.end()
 
